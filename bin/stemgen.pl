@@ -34,11 +34,42 @@ use porterd;
 use apgen;
 
 ####
+####			APPLICATION GENERATOR DESCRIPTION
+#### This is an application generator for conflation algorithms in perl language.
+#### This package includes the following:
 ####
-#### This is the main routine of the application generator which was implemented as the final product of
-#### the domain analysis of conflation algorithms.
+#### - application generator for stemmers
+####    * stemgen.pl - main perl routine
+####    * apgen.pm - application generator class
+####    * corpus.pm - corpus parsing class
+####    * ngram.pm - utility class supporting n-gram specific operations
+####    * porterd.pm - class implementing porter algorithm (developed version)
+####    * sv.pm - utility class supporting successof variety specific operations
+####    * util.pm - generic utlity class
+####    * tempstem.pm - stemmer template used by the application generator
 ####
-#### The research paper can be access via the following link:
+#### - rule files for the following stemmers:
+####    * porter
+####    * lovins
+####    * k-stem
+####    * sremoval
+####    * paice
+####    * successor variety
+####
+#### - unprocesses corpus file (in a separate zip file)
+####    * unprocessed_corpus.txt
+####
+#### - processed corpus file
+####    * corpus.txt
+####
+#### - usd dictionary
+####    * usd.txt
+####
+#### - file containing the list of words that have been tested
+####    * w.txt
+####
+####
+#### The research paper is access via the following link:
 #### https://www.researchgate.net/publication/221553184_A_Case_Study_of_Using_Domain_Engineering_for_the_Conflation_Algorithms_Domain
 ####
 #### O. Yilmaz and W. Frakes, “A Case Study of Using Domain Engineering for the Conflation Algorithms Domain”,
