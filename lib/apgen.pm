@@ -1,5 +1,22 @@
 #!/usr/local/bin/perl -w
-#use strict;
+#
+# This file is part of the Stemming Algorithms Application Generator Software
+# distribution (https://github.com/okany/stemgen).
+# Copyright (c) 2009 - 2021 Okan Yilmaz
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 use warnings;
 use IO::Socket;
 use corpus;
@@ -7,8 +24,14 @@ use v5.10;
 use feature qw( switch );
 no warnings qw( experimental::smartmatch );
 
+###
+### apgen library which parses the rule file and generates code for a new conflation algorithm
+###
 package apgen;
 
+#
+# read append functionality
+#
 sub read_append {
 
     given ($_[1]) {
@@ -24,6 +47,9 @@ sub read_append {
     return $retval;
 }
 
+#
+# read and replace functionality
+#
 sub read_replace {
     given ($_[1]) {
         when ('suffix') {
@@ -43,6 +69,9 @@ sub read_replace {
     return $retval;
 }
 
+#
+# read and remove functionality
+#
 sub read_remove {
     given ($_[1]) {
         when ("suffix") {
@@ -69,6 +98,9 @@ sub read_remove {
     return $retval;
 }
 
+#
+# read and check if it is a vovel
+#
 sub read_isVowel {
     given ($_[3]) {
         when ("first") {
@@ -86,6 +118,9 @@ sub read_isVowel {
     return $retval;
 }
 
+#
+# read and check if it is a consonant
+#
 sub read_isConsonant {
     given ($_[3]) {
         when ("first") {
@@ -126,6 +161,9 @@ sub read_isMeasure {
     return $retval;
 }
 
+#
+# read and match the content
+#
 sub read_match {
     $begin = '$' . "stem =~ /";
     $end = "/";
@@ -196,6 +234,9 @@ sub read_match {
 
 }
 
+#
+# conditional read
+#
 sub read_cond {
     my ($self, @words) = @_;
 
@@ -216,6 +257,9 @@ sub read_cond {
     print $rname . " " . $self->{_rule}->{$rname} . "\n";
 }
 
+#
+# readn and step
+#
 sub read_steps {
     my ($self, $ind, $element, $tab, @words) = @_;
 
@@ -382,6 +426,9 @@ sub read_steps {
     }
 }
 
+#
+# read definition file
+#
 sub read_def_file {
 
     my ($self, $rfile, $ofile) = @_;
@@ -473,6 +520,9 @@ sub read_def_file {
 
 }
 
+#
+# create a new stemmer
+#
 sub new_stemmer {
 
        my ($self) = @_;
@@ -565,6 +615,9 @@ sub new_stemmer {
     close($ofile);
 }
 
+#
+# create and instance of application generator
+#
 sub new {
     my ($self) = $_[0];
 

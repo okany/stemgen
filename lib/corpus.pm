@@ -1,10 +1,33 @@
 #!/usr/local/bin/perl -w
-#use strict;
+#
+# This file is part of the Stemming Algorithms Application Generator Software
+# distribution (https://github.com/okany/stemgen).
+# Copyright (c) 2009 - 2021 Okan Yilmaz
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 use warnings;
 use IO::Socket;
 
+###
+### Package to process a corpus file
+###
 package corpus;
 
+#
+# loads the corpus
+#
 sub load_corpus {
 
     my ($self) = $_[0];
@@ -48,6 +71,9 @@ sub load_corpus {
     $self->index_array;
 }
 
+#
+# dumps the content of the corpus
+#
 sub dump {
     my ($self) = $_[0];
     my ($ofname) = $_[1];
@@ -58,6 +84,9 @@ sub dump {
     close(OFILE);
 }
 
+#
+# creates an index array
+#
 sub index_array {
 
     my ($self) = $_[0];
@@ -69,6 +98,9 @@ sub index_array {
     $self->{_wsize} = $ind;
 }
 
+#
+# creates a corpus instance
+#
 sub new {
 
     my ($self) = $_[0];

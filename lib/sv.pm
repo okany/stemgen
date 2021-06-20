@@ -1,11 +1,33 @@
 #!/usr/local/bin/perl -w
-#use strict;
+#
+# This file is part of the Stemming Algorithms Application Generator Software
+# distribution (https://github.com/okany/stemgen).
+# Copyright (c) 2009 - 2021 Okan Yilmaz
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 use warnings;
 use IO::Socket;
 use corpus;
 
+###
+###  package for processing successor variety type conflation algorithms
+###
 package sv;
 
+#
+# dump prefix hash content
 sub dump_prefix_hash {
   my($self) = @_;
 
@@ -13,6 +35,10 @@ sub dump_prefix_hash {
     print "SUBS=$subs SUCC=$self->{_pfix}->{$subs}->{succ} FREQ=$self->{_pfix}->{$subs}->{freq} \n";
   }
 }
+
+#
+# create a new prefix hash
+#
 sub create_prefix_hash {
   my($self) = @_;
 
@@ -55,6 +81,9 @@ sub create_prefix_hash {
   #$self->dump_prefix_hash;
 }
 
+#
+# analyze the prefix hash
+#
 sub analyze_prefix_hash {
   my($self) = @_;
 
@@ -64,6 +93,10 @@ sub analyze_prefix_hash {
     }
   }
 }
+
+#
+# process a corpus to create prefix hash and calculate entropies
+#
 sub process_corpus {
 
   # create hash table for prefixes
@@ -76,6 +109,9 @@ sub process_corpus {
 
 }
 
+#
+# calculate entropies
+#
 sub calc_entropies {
   my($self) = @_;
 
@@ -95,14 +131,25 @@ sub calc_entropies {
     #print "$this: $self->{_pfix}->{$this}->{entropy}\n";
   }
 }
+
+#
+# reset segments
+#
 sub reset_segments {
   $_[0]->{_segnum} = 0;
 }
+
+#
+# add a new segment
+#
 sub add_segment {
   
   $_[0]->{_segment}[$_[0]->{_segnum}++] = $_[1];
 }
 
+#
+# display all segments
+#
 sub display_segments {
   my($self, $word) = @_;
 
@@ -113,6 +160,9 @@ sub display_segments {
   }
 }
 
+#
+# determine the stem of a word
+#
 sub determine_stem {
   my($self, $word) = @_;
   $sub0 = substr($word,0,$self->{_segment}[0]);
@@ -126,6 +176,10 @@ sub determine_stem {
     return $sub0;
   }
 }
+
+#
+# main stemming function
+#
 sub stem {
 
   my($self, $word, $debug) = @_;
@@ -177,6 +231,9 @@ sub stem {
   return $self->determine_stem($word);
 }
 
+#
+# initialize a successor variety algorithm instance
+#
 sub new {
   my ($self) = $_[0];
   my $objref = {

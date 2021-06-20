@@ -1,14 +1,42 @@
 #!/usr/local/bin/perl -w
-#use strict;
+#
+# This file is part of the Stemming Algorithms Application Generator Software
+# distribution (https://github.com/okany/stemgen).
+# Copyright (c) 2009 - 2021 Okan Yilmaz
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 use warnings;
 use corpus;
 
+###
+### package to create N-GRAM type conflation algorithms
+### TBD
+###
 package ngram;
 
+#
+# initializes the ngram with default values
+#
 sub init_ngram {
   $_[0]->{_corp}->{_wlist}->{$_[1]}->{ngram}->{size}=0;
   $_[0]->{_corp}->{_wlist}->{$_[1]}->{ngram}->{array}=();
 }
+
+#
+# adds a new ngram
+#
 sub add_ngram {
 
   my($i, $ng, $index);
@@ -37,6 +65,9 @@ sub add_ngram {
   $ng->{size}++;
 }
 
+#
+# dups the content of the ngram
+#
 sub dump_ngrams {
   my($i, $ng);
   $ng = $_[0]->{_corp}->{_wlist}->{$_[1]}->{ngram};
@@ -47,6 +78,9 @@ sub dump_ngrams {
   print "\n";
 }
 
+#
+# created ngram clusters
+#
 sub create_ngrams {
   my($i, $word, $subs);
   # create an n-gram hash table for each word
@@ -61,6 +95,9 @@ sub create_ngrams {
   }
 }
 
+#
+# finds the common ngrams
+#
 sub common_ngrams {
   my($cm, $i, $j);
   for($i=0,$j=0,$cm=0;($i<$_[1]->{ngram}->{size} && $j<$_[2]->{ngram}->{size});){
@@ -77,6 +114,9 @@ sub common_ngrams {
   return $cm;
 }
 
+#
+# inserts a new cluster
+#
 sub insert_cluster {
   my($i);
   for($i=$_[1]->{cnum};($i>$_[2]);$i--) {
@@ -87,6 +127,9 @@ sub insert_cluster {
   #print "index=$_[1]->{cluster}[$i] index=$i value=$_[3]\n";
 }
 
+#
+# adds a new cluster
+#
 sub add_cluster {
   my($i);
   #print "i=$i $_[1]->{cnum} ind=$_[2]\n";
@@ -104,6 +147,9 @@ sub add_cluster {
   return $i;
 }
 
+#
+# adds a number of clusters
+#
 sub add_clusters {
   my($i);
   #print "i=$i size=$_[1]->{size}\n";
@@ -113,6 +159,9 @@ sub add_clusters {
   }
 }
 
+#
+# dumps the content of ngram clusters
+#
 sub dump_clusters {
   my($i);
   #print "i=$i size=$_[1]->{size}\n";
@@ -122,6 +171,9 @@ sub dump_clusters {
   print "\n";
 }
 
+#
+# dumps all ngram clusters
+#
 sub dump_all_clusters {
   my($i);
   for($i=0;$i<$_[0]->{_corp}->{_wsize};$i++) {
@@ -132,10 +184,16 @@ sub dump_all_clusters {
   }
 }
 
+#
+# resets the cluster data type
+#
 sub reset_clusters {
   $_[1]->{cnum} = 0;
 }
 
+#
+# find a cluster
+#
 sub find_cluster {
   my($self, $cid) = @_;
   #print "finding cluster $ref->{cid} $cid\n";
@@ -149,6 +207,9 @@ sub find_cluster {
   return($cid);
 }
 
+#
+# merge two clusters
+#
 sub merge_clusters {
   my($i);
   #print "cluster 1 \n";
@@ -162,6 +223,10 @@ sub merge_clusters {
   #$_[0]->dump_clusters($_[1]);
  
 }
+
+#
+# creates clusters from ngrams
+#
 sub cluster_ngrams {
   my($i, $j, $ind);
   #print "Dumping the matrix".$_[0]->{_corp}->{_wsize}."\n";
@@ -198,6 +263,10 @@ sub cluster_ngrams {
     }
   }
 }
+
+#
+# dumps the content of a matrix
+#
 sub dump_matrix {
   my($i, $j);
   #print "Dumping the matrix".$_[0]->{_corp}->{_wsize}."\n";
@@ -209,6 +278,9 @@ sub dump_matrix {
   }
 }
 
+#
+# creates a matrix
+#
 sub create_matrix {
 
   my($self) = @_;
@@ -232,6 +304,7 @@ sub create_matrix {
   }
 }
 
+
 sub ngram_matrix {
 
   $_[0]->create_ngrams;
@@ -239,6 +312,10 @@ sub ngram_matrix {
   $_[0]->cluster_ngrams;
   $_[0]->dump_all_clusters;
 }
+
+#
+# TBD - creating stemming clusters
+#
 sub stem {
 
   my($self, $word, $debug) = @_;
@@ -250,6 +327,9 @@ sub stem {
   return $_[1];
 }
 
+#
+# initializes ngram data structure
+#
 sub new {
   my ($self) = $_[0];
   my $objref = {

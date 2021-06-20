@@ -1,7 +1,9 @@
 #!/usr/local/bin/perl -w
-#use strict;
 use warnings;
 
+###
+### this package contains a library of porter algorithm which is developed by a human
+###
 package porterd;
 
 sub stem {
@@ -127,6 +129,9 @@ sub stem {
   return $word;
 }
 
+#
+# create an instance of the porter algorithm
+#
 sub new {
   my ($self) = $_[0];
   my $objref = {
