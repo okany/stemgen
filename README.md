@@ -1,4 +1,4 @@
-##			APPLICATION GENERATOR DESCRIPTION
+##			APPLICATION GENERATOR FOR CONFLATION ALGORITHMS
 ### This is an application generator for conflation algorithms in perl language. 
 #### This package includes the following:
 
