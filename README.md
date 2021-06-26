@@ -90,5 +90,5 @@
        perl succvar_gen.pl -o r -a succvar -c corpus.txt -w -w.txt
  -- to parse a corpus file:
        perl stemgen.pl -o p -c unprocessed_corpus.txt -p c.txt
-
+```
 
